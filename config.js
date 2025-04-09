@@ -1,9 +1,35 @@
-const dotenv = require('dotenv');
-dotenv.config();
+import dotenv from "dotenv"
 
-const PORT = 5555;
+dotenv.config()
 
-// a sample mongodb atlas url, MUST CHANGE to your own
-const mongoDBURL =  "mongodb+srv://"+process.env.MONGO_NAME+":"+process.env.MONGO_PASSWORD+"@<cluster>/<dbname>?retryWrites=true&w=majority";
+const PORT = process.env.PORT
+const MONGODB_URL = process.env.MONGODB_URL
+const SESSION_SECRET = process.env.SESSION_SECRET
+const FRONTEND_URL = process.env.FRONTEND_URL
+const NODE_ENV = process.env.NODE_ENV || "development"
+const API_ROUTES_DIR = process.env.API_ROUTES_DIR || "api"
 
-module.exports = { PORT, mongoDBURL };
+const NO_AUTH_PATHS = ["/auth/login", "/auth/register", "/public/", "/health"]
+
+if (!SESSION_SECRET) {
+	console.error(
+		"FATAL ERROR: SESSION_SECRET is not defined in environment variables.",
+	)
+	process.exit(1)
+}
+if (!MONGODB_URL) {
+	console.error(
+		"FATAL ERROR: MONGODB_URL is not defined in environment variables.",
+	)
+	process.exit(1)
+}
+
+export {
+	PORT,
+	MONGODB_URL,
+	SESSION_SECRET,
+	FRONTEND_URL,
+	NODE_ENV,
+	NO_AUTH_PATHS,
+	API_ROUTES_DIR,
+}
