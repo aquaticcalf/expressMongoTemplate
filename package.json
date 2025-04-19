@@ -1,6 +1,7 @@
 {
 	"name": "expressmongotemplate",
 	"version": "1.0.1",
+	"type": "module",
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
@@ -16,9 +17,10 @@
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
 		"file-system-api-router": "^1.0.1",
-		"iron-session": "^8.0.4",
+		"iron-session": "^6.3.1",
 		"mongoose": "^8.12.1",
-		"nodemon": "^3.1.9"
+		"nodemon": "^3.1.9",
+		"uuid": "^11.1.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4"

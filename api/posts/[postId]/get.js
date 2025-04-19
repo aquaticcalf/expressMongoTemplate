@@ -1,4 +1,4 @@
-import Post from "../../../models/post"
+import Post from "../../../models/post.js"
 
 export default async function getPost(req, res) {
 	const { postId } = req.params

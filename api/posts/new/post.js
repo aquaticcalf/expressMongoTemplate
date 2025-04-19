@@ -1,4 +1,4 @@
-import Post from "../../../models/post"
+import Post from "../../../models/post.js"
 
 export default async function createPost(req, res) {
 	const { title, content } = req.body

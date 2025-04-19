@@ -1,7 +1,9 @@
-import User from "../../../models/user"
+import User from "../../../models/user.js"
 
 export default async function signupUser(req, res) {
+	console.log("hi")
 	const { username, password, email } = req.body
+	console.log("Received signup request:", req.body)
 
 	try {
 		const existingUser = await User.findOne({ username })
