@@ -1,11 +1,16 @@
-import Post from "../../../models/post.js"
+import prisma from "../../../index.js"
 
 export default async function createPost(req, res) {
 	const { title, content } = req.body
 
 	try {
-		const newPost = new Post({ title, content, author: req.user._id })
-		await newPost.save()
+		const newPost = await prisma.post.create({
+			data: {
+				title: title,
+				content: content,
+				authorId: req.user.id,
+			},
+		})
 
 		res
 			.status(201)

@@ -1,10 +1,14 @@
-import Post from "../../../models/post.js"
+import prisma from "../../../index.js"
 
 export default async function getPost(req, res) {
 	const { postId } = req.params
 
 	try {
-		const post = await Post.findById(postId)
+		const post = await prisma.post.findUnique({
+			where: {
+				id: postId,
+			},
+		})
 
 		if (!post) {
 			return res.status(404).json({ message: "Post not found" })

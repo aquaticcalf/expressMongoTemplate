@@ -1,2 +1,6 @@
 .env
 node_modules
+dev.md
+prisma/migrations/
+generated/
+.vscode

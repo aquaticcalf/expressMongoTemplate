@@ -9,7 +9,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL
 const NODE_ENV = process.env.NODE_ENV || "development"
 const API_ROUTES_DIR = process.env.API_ROUTES_DIR || "api"
 
-const NO_AUTH_PATHS = ["/auth/login", "/auth/register", "/public/", "/health"]
+const NO_AUTH_PATHS = ["/auth/login", "/auth/register", "/public", "/health"]
 
 if (!SESSION_SECRET) {
 	console.error(
