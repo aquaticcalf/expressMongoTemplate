@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const PORT = process.env.PORT
-const MONGODB_URL = process.env.MONGODB_URL
+const DATABASE_URL = process.env.DATABASE_URL
 const SESSION_SECRET = process.env.SESSION_SECRET
 const FRONTEND_URL = process.env.FRONTEND_URL
 const NODE_ENV = process.env.NODE_ENV || "development"
@@ -17,16 +17,16 @@ if (!SESSION_SECRET) {
 	)
 	process.exit(1)
 }
-if (!MONGODB_URL) {
+if (!DATABASE_URL) {
 	console.error(
-		"FATAL ERROR: MONGODB_URL is not defined in environment variables.",
+		"FATAL ERROR: DATABASE_URL is not defined in environment variables.",
 	)
 	process.exit(1)
 }
 
 export {
 	PORT,
-	MONGODB_URL,
+	DATABASE_URL,
 	SESSION_SECRET,
 	FRONTEND_URL,
 	NODE_ENV,
