@@ -1,20 +1,24 @@
-import User from "../../../models/user.js"
+import prisma from "../../../index.js"
 
 export default async function loginUser(req, res) {
 	const { username, password } = req.body
 
 	try {
-		const user = await User.findOne({ username })
+		const user = await prisma.user.findUnique({
+			where: {
+				username: username,
+			},
+		})
 		if (!user) {
-			return res.status(401).json({ message: "Invalid username or password" })
+			return res.status(401).json({ message: "Invalid username" })
 		}
 
-		const isMatch = await user.comparePassword(password)
+		const isMatch = await bcrypt.compare(password, user.password)
 		if (!isMatch) {
-			return res.status(401).json({ message: "Invalid username or password" })
+			return res.status(401).json({ message: "Invalid password" })
 		}
 
-		req.session.userId = user._id
+		req.session.userId = user.id
 		res.json({ message: "Login successful" })
 	} catch (error) {
 		res.status(500).json({ message: "Error logging in", error })

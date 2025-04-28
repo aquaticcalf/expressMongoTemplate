@@ -1,7 +1,7 @@
 import cors from "cors"
 import express from "express"
 import { ironSession } from "iron-session/express"
-import User from "./models/user.js"
+import prisma from "./index.js"
 
 import {
 	FRONTEND_URL,
@@ -36,9 +36,7 @@ app.use(
 )
 
 const authenticate = async (req, res, next) => {
-	const requiresAuth = !NO_AUTH_PATHS.some(path => {
-		return path.endsWith("/") ? req.path.startsWith(path) : req.path === path
-	})
+	const requiresAuth = !NO_AUTH_PATHS.includes(req.path)
 
 	if (!requiresAuth) {
 		console.log(`Path ${req.path} does not require authentication.`)
@@ -48,12 +46,14 @@ const authenticate = async (req, res, next) => {
 	console.log(`Path ${req.path} requires authentication.`)
 
 	if (!req.session || !req.session.userId) {
-		console.log("Authentication failed: No session or userId.")
+		console.log(`Authentication failed: No session or userId. Path:${req.path}`)
 		return res.status(401).send({ message: "Unauthorized: Please log in." })
 	}
 
 	try {
-		const user = await User.findById(req.session.userId)
+		const user = await prisma.user.findUnique({
+			id: req.session.userId,
+		})
 		if (!user) {
 			console.log(
 				`Authentication failed: User not found for ID ${req.session.userId}. Invalidating session.`,
@@ -77,10 +77,6 @@ app.use(authenticate)
 
 app.get("/health", (req, res) => {
 	res.status(200).send("OK")
-})
-
-app.use((req, res) => {
-	res.status(404).send({ message: "Not Found" })
 })
 
 export default app
