@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "expressmongotemplate",
+      "name": "karna",
       "dependencies": {
         "@prisma/client": "^6.6.0",
         "cors": "^2.8.5",

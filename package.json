@@ -1,5 +1,5 @@
 {
-	"name": "expressmongotemplate",
+	"name": "karna",
 	"version": "1.0.1",
 	"type": "module",
 	"main": "index.js",
@@ -12,7 +12,7 @@
 	},
 	"author": "nikhil",
 	"license": "MIT",
-	"description": "",
+	"description": "a strong starting point for your backend",
 	"dependencies": {
 		"@prisma/client": "^6.6.0",
 		"cors": "^2.8.5",
