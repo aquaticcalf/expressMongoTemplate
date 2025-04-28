@@ -7,14 +7,16 @@ const prisma = new PrismaClient().$extends({
 	query: {
 		user: {
 			$allOperations({ operation, args, query }) {
-				if (['create', 'update'].includes(operation) && args.data['password']) {
-					args.data['password'] = Bun.password.hash(args.data['password'], { algorithm: "bcrypt", cost: 10, }
-					)
+				if (["create", "update"].includes(operation) && args.data.password) {
+					args.data.password = Bun.password.hash(args.data.password, {
+						algorithm: "bcrypt",
+						cost: 10,
+					})
 				}
 				return query(args)
-			}
-		}
-	}
+			},
+		},
+	},
 })
 
 async function main() {
