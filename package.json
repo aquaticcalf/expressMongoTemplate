@@ -4,24 +4,23 @@
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js",
-		"dev": "nodemon index.js",
-		"biome": "npx @biomejs/biome check --write . --verbose",
-		"seed": "node ./prisma/seed.js"
+		"start": "bun index.js",
+		"dev": "bun --watch index.js",
+		"biome": "bunx @biomejs/biome check --write . --verbose",
+		"seed": "bun ./prisma/seed.js",
+		"generate": "bunx prisma generate"
 	},
 	"author": "nikhil",
 	"license": "MIT",
 	"description": "",
 	"dependencies": {
 		"@prisma/client": "^6.6.0",
-		"bcrypt": "^5.1.1",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
 		"file-system-api-router": "^1.0.1",
 		"iron-session": "^6.3.1",
 		"mongoose": "^8.12.1",
-		"nodemon": "^3.1.9",
 		"uuid": "^11.1.0"
 	},
 	"devDependencies": {
