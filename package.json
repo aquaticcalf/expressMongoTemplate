@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
-		"start": "bun index.js",
-		"dev": "bun --watch index.js",
+		"start": "bun generate && bun index.js",
+		"dev": "bun generate && bun seed && bun --watch index.js",
 		"biome": "bunx @biomejs/biome check --write . --verbose",
 		"seed": "bun ./prisma/seed.js",
 		"generate": "bunx prisma generate"
