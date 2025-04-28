@@ -1,1 +1,5 @@
 ## karna
+
+```
+npx prisma generate
+```
