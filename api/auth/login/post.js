@@ -13,7 +13,7 @@ export default async function loginUser(req, res) {
 			return res.status(401).json({ message: "Invalid username" })
 		}
 
-		const isMatch = user.password === password
+		const isMatch = await bcrypt.compare(password, user.password)
 		if (!isMatch) {
 			return res.status(401).json({ message: "Invalid password" })
 		}

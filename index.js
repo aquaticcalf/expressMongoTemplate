@@ -2,8 +2,20 @@ import { registerRoutes } from "file-system-api-router"
 import app from "./app.js"
 import { API_ROUTES_DIR, PORT } from "./config.js"
 import { PrismaClient } from "./generated/prisma/index.js"
+import bcrypt from 'bcrypt'
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient().$extends({
+  query: {
+    user: {
+      $allOperations({ operation, args, query }) {
+        if (['create', 'update'].includes(operation) && args.data['password']) {
+          args.data['password'] = bcrypt.hashSync(args.data['password'], 10)
+        }
+        return query(args)
+      }
+    }
+  }
+})
 
 async function main() {
 	try {
