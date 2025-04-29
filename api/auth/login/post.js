@@ -1,4 +1,5 @@
-import prisma from "../../../index.js"
+import bcrypt from "bcrypt"
+import { prisma } from "../../../index.js"
 
 export default async function loginUser(req, res) {
 	const { username, password } = req.body
@@ -13,7 +14,7 @@ export default async function loginUser(req, res) {
 			return res.status(401).json({ message: "Invalid username" })
 		}
 
-		const isMatch = await Bun.password.verify(password, user.password)
+		const isMatch = await bcrypt.compare(password, user.password)
 		if (!isMatch) {
 			return res.status(401).json({ message: "Invalid password" })
 		}

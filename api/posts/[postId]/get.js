@@ -1,4 +1,4 @@
-import prisma from "../../../index.js"
+import { prisma } from "../../../index.js"
 
 export default async function getPost(req, res) {
 	const { postId } = req.params

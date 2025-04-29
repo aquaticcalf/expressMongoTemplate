@@ -1,7 +1,7 @@
 import cors from "cors"
 import express from "express"
 import { ironSession } from "iron-session/express"
-import prisma from "./index.js"
+import { prisma } from "./index.js"
 
 import {
 	FRONTEND_URL,

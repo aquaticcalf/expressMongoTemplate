@@ -1,4 +1,4 @@
-import prisma from "../../../index.js"
+import { prisma } from "../../../index.js"
 
 export default async function signupUser(req, res) {
 	const { username, password } = req.body

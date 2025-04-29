@@ -4,3 +4,4 @@ dev.md
 prisma/migrations/
 generated/
 .vscode
+.vercel

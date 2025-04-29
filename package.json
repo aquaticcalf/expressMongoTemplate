@@ -4,7 +4,8 @@
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
-		"start": "bun generate && bun index.js",
+		"build": "prisma generate",
+		"start": "node index.js",
 		"dev": "bun generate && bun seed && bun --watch index.js",
 		"biome": "bunx @biomejs/biome check --write . --verbose",
 		"seed": "bun ./prisma/seed.js",
@@ -15,6 +16,7 @@
 	"description": "a strong starting point for your backend",
 	"dependencies": {
 		"@prisma/client": "^6.6.0",
+		"bcrypt": "^5.1.1",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",

@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt"
 import { registerRoutes } from "file-system-api-router"
 import app from "./app.js"
 import { API_ROUTES_DIR, PORT } from "./config.js"
@@ -8,10 +9,7 @@ const prisma = new PrismaClient().$extends({
 		user: {
 			$allOperations({ operation, args, query }) {
 				if (["create", "update"].includes(operation) && args.data.password) {
-					args.data.password = Bun.password.hash(args.data.password, {
-						algorithm: "bcrypt",
-						cost: 10,
-					})
+					args.data.password = bcrypt.hash(args.data.password, 10)
 				}
 				return query(args)
 			},
@@ -40,4 +38,6 @@ async function main() {
 
 main()
 
-export default prisma
+export default app
+
+export { prisma }
